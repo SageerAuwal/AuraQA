@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  /* Dark theme by default (to preserve glassmorphic dark design) */
+  --background: #090d16;
+  --foreground: #f8fafc;
+  --card-bg: rgba(15, 23, 42, 0.45);
+  --card-border: rgba(16, 185, 129, 0.15);
+  --border: rgba(255, 255, 255, 0.06);
+  --primary: #10b981; /* Emerald Green */
+  --primary-hover: #34d399; /* Mint Green */
+  --primary-glow: rgba(16, 185, 129, 0.15);
+  --sidebar-bg: rgba(15, 23, 42, 0.6);
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --text-muted: #94a3b8;
+}
+
+html.light {
+  /* Light theme override */
+  --background: #f8fafc;
+  --foreground: #0f172a; /* Deeper slate-900 for text */
+  --card-bg: #ffffff;
+  --card-border: rgba(5, 150, 105, 0.15);
+  --border: #e2e8f0; /* Crisp slate-200 boundary borders */
+  --primary: #047857; /* Emerald Green (Darkened for contrast) */
+  --primary-hover: #059669; /* Mint Green */
+  --primary-glow: rgba(4, 120, 87, 0.1);
+  --sidebar-bg: #f1f5f9; /* Solid light grey for distinct sidebar panel */
+  --sidebar-border: #cbd5e1; /* Clear divider border */
+  --text-muted: #475569; /* Charcoal gray for highly readable muted text */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card-bg);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-glow: var(--primary-glow);
+  --color-muted: var(--text-muted);
+  --color-sidebar: var(--sidebar-bg);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Glassmorphism UI Components */
+.glass-panel {
+  background: var(--sidebar-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--sidebar-border);
+}
+
+.glass-panel-emerald {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.emerald-glow {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.12);
+}
+
+.emerald-gradient-text {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Webkit Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+.layout-border {
+  border-color: var(--border) !important;
+}

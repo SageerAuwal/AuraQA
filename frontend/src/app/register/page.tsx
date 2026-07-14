@@ -1,0 +1,237 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { api } from "../services/api";
+import { BookOpen, Lock, Mail, User, Loader2, ArrowRight, Sun, Moon } from "lucide-react";
+
+export default function RegisterPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme") as "dark" | "light";
+      if (savedTheme) {
+        setTheme(savedTheme);
+        if (savedTheme === "light") {
+          document.documentElement.classList.add("light");
+        } else {
+          document.documentElement.classList.remove("light");
+        }
+      }
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    localStorage.setItem("theme", nextTheme);
+    if (nextTheme === "light") {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.remove("light");
+    }
+  };
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Step 1: Register User
+      await api.register(name, email, password);
+      
+      // Step 2: Auto Login for better user experience
+      const authData = await api.login(email, password);
+      localStorage.setItem("token", authData.access_token);
+      
+      // Step 3: Fetch profile details to cache user name
+      const user = await api.getMe();
+      localStorage.setItem("user_name", user.name);
+      localStorage.setItem("user_email", user.email);
+      
+      // Redirect to dashboard
+      router.push("/dashboard");
+    } catch (err: any) {
+      setError(err.message || "Registration failed. Please check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background text-foreground relative px-6 py-12 selection:bg-primary selection:text-background animate-fade-in">
+      {/* Theme Toggler Button in corner */}
+      <div className="absolute top-6 right-6 z-20">
+        <button 
+          onClick={toggleTheme}
+          className="p-2 rounded-lg border border-border/30 hover:border-primary/40 hover:bg-primary/5 text-slate-400 hover:text-primary transition-all duration-200 cursor-pointer bg-card/40 backdrop-blur"
+          title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          {theme === "dark" ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
+        </button>
+      </div>
+
+      {/* Decorative background lights */}
+      <div className="absolute top-[10%] left-[20%] w-[35%] h-[35%] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[20%] w-[35%] h-[35%] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+
+      <div className="w-full max-w-md space-y-8 z-10">
+        
+        {/* Logo and title */}
+        <div className="flex flex-col items-center text-center space-y-4">
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+              <BookOpen className="w-6 h-6 text-background font-bold" />
+            </div>
+            <span className="text-2xl font-bold tracking-tight">
+              Aura<span className="text-primary">QA</span>
+            </span>
+          </Link>
+          <h2 className="text-2xl font-extrabold tracking-tight">
+            Create your account
+          </h2>
+          <p className="text-sm text-slate-400">
+            Sign up now to start indexing and conversing with your documents locally.
+          </p>
+        </div>
+
+        {/* Card Panel */}
+        <div className="glass-panel-emerald p-8 rounded-2xl shadow-xl space-y-6">
+          {error && (
+            <div className="p-4 rounded-lg bg-red-950/45 border border-red-900/50 text-red-200 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleRegister} className="space-y-4">
+            
+            {/* Name Field */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                Full Name
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                  <User className="w-4 h-4" />
+                </div>
+                <input
+                  type="text"
+                  required
+                  placeholder="John Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg focus:border-primary/50 focus:outline-none text-sm text-foreground transition-all duration-200"
+                />
+              </div>
+            </div>
+
+            {/* Email Field */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                Email Address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <input
+                  type="email"
+                  required
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg focus:border-primary/50 focus:outline-none text-sm text-foreground transition-all duration-200"
+                />
+              </div>
+            </div>
+
+            {/* Password Field */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                  <Lock className="w-4 h-4" />
+                </div>
+                <input
+                  type="password"
+                  required
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg focus:border-primary/50 focus:outline-none text-sm text-foreground transition-all duration-200"
+                />
+              </div>
+            </div>
+
+            {/* Confirm Password Field */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                  <Lock className="w-4 h-4" />
+                </div>
+                <input
+                  type="password"
+                  required
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg focus:border-primary/50 focus:outline-none text-sm text-foreground transition-all duration-200"
+                />
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3.5 px-4 rounded-lg bg-primary hover:bg-primary-hover text-background font-bold transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <span>Creating Account...</span>
+                </>
+              ) : (
+                <>
+                  <span>Create Account</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+
+          </form>
+        </div>
+
+        {/* Link to Login */}
+        <p className="text-center text-sm text-slate-500">
+          Already have an account?{" "}
+          <Link href="/login" className="text-primary hover:underline font-semibold">
+            Sign In
+          </Link>
+        </p>
+
+      </div>
+    </div>
+  );
+}
