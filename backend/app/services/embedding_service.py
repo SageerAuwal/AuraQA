@@ -11,7 +11,7 @@ class EmbeddingService:
         """Lazy load the sentence transformer model to prevent server start block."""
         if self.model is None:
             # SentenceTransformer automatically selects CUDA GPU if available, else CPU
-            self.model = SentenceTransformer(settings.EMBEDDING_MODEL_NAME)
+            self.model = SentenceTransformer(settings.EMBEDDING_MODEL_PATH)
         return self.model
 
     def get_embedding(self, text: str) -> List[float]:

@@ -4,8 +4,7 @@ import numpy as np
 from typing import List, Tuple
 from app.core.config import settings
 
-# Directory to store vector files (relative to backend root)
-VECTOR_DB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "vectorstore")
+VECTOR_DB_DIR = settings.VECTOR_DB_DIR
 INDEX_PATH = os.path.join(VECTOR_DB_DIR, "index.faiss")
 DIMENSION = 384  # paraphrase-multilingual-MiniLM-L12-v2 model size is 384
 

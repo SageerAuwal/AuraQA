@@ -3,8 +3,9 @@ import shutil
 import uuid
 from fastapi import UploadFile, HTTPException, status
 
-# Resolve uploads directory (backend root folder / uploads)
-UPLOAD_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "uploads")
+from app.core.config import settings
+
+UPLOAD_DIR = settings.UPLOAD_DIR
 
 ALLOWED_EXTENSIONS = {".pdf", ".docx", ".txt", ".csv"}
 
