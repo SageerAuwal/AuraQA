@@ -7,15 +7,6 @@ from app.models.models import DocumentChunk
 from app.api.endpoints.upload import detect_document_language
 from app.core.config import settings
 
-LANG_NAMES = {
-    "en": "English",
-    "fr": "French",
-    "es": "Spanish",
-    "de": "German",
-    "ar": "Arabic",
-    "ha": "Hausa"
-}
-
 class RAGService:
     async def _answer_via_summary(self, document_id: int, query_text: str, max_score: float, db: Session) -> Dict[str, Any]:
         """Helper to check if a query can be answered using the general Document Summary."""
@@ -43,13 +34,13 @@ class RAGService:
                 f"Conclusions: {db_summary.conclusions}"
             )
             detected_lang = detect_document_language(query_text)
-            full_lang = LANG_NAMES.get(detected_lang, "English")
+            lang_name = self._get_full_language_name(detected_lang)
             
             system_prompt = (
                 "You are a helpful AI assistant. Answer the user's question based on the provided general Document Summary.\n"
                 "Keep your answer extremely brief, factual, and direct (at most 2 short sentences). Do not make up facts.\n"
                 "If the question cannot be answered using the general Document Summary, you MUST respond with: 'NOT_FOUND'.\n"
-                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {full_lang})."
+                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {lang_name}). Do not use English."
             )
             user_prompt = f"Context:\n{summary_context}\n\nQuestion: {query_text}\nAnswer:"
             
@@ -160,6 +151,17 @@ class RAGService:
         }
         return prefixes.get(lang.lower(), prefixes["en"])
 
+    def _get_full_language_name(self, lang: str) -> str:
+        lang_names = {
+            "en": "English",
+            "fr": "French (Français)",
+            "es": "Spanish (Español)",
+            "de": "German (Deutsch)",
+            "ar": "Arabic (العربية)",
+            "ha": "Hausa"
+        }
+        return lang_names.get(lang.lower(), "English")
+
     async def answer_question(self, document_id: Optional[int], query_text: str, db: Session, chat_id: int = None, all_documents: bool = False) -> Dict[str, Any]:
         """
         Main retrieval-augmented generation pipeline.
@@ -193,7 +195,6 @@ class RAGService:
         # Step 0: Clean query and classify intent (corrects spelling mistakes dynamically)
         corrected_query, category = await self._classify_and_correct_query(query_text)
         detected_lang = detect_document_language(corrected_query)
-        full_lang = LANG_NAMES.get(detected_lang, "English")
 
         # Retrieve short-term memory (conversation history) if chat_id is specified
         history_context = ""
@@ -238,11 +239,12 @@ class RAGService:
 
         # Case A: Pure General AI Mode (no target documents)
         if not doc_ids:
+            lang_name = self._get_full_language_name(detected_lang)
             system_prompt = (
                 "You are AuraQA, a helpful, intelligent, and secure offline AI assistant.\n"
                 "Provide detailed, smart, and context-aware responses to the user's questions.\n"
                 "Use the 'Recent Chat History' to understand the context of the conversation and resolve references to previous turns.\n"
-                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {full_lang})."
+                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {lang_name}). Do not use English."
             )
             user_prompt = ""
             if history_context:
@@ -311,12 +313,13 @@ class RAGService:
                 })
             context = "\n\n".join(context_blocks)
             
+            lang_name = self._get_full_language_name(detected_lang)
             system_prompt = (
                 "You are a helpful AI assistant. Answer the user's question based strictly and ONLY on the provided Context.\n"
                 "Keep your answer extremely brief, factual, and direct (at most 2 short sentences). Do not make up facts, extrapolate, or mention external info.\n"
                 "If the answer is not contained in the Context, respond with: 'This answer is not available in the uploaded document.'\n"
                 "Use the 'Recent Chat History' to understand the context of the conversation and resolve references (like 'it', 'they', 'the first one', 'what you said earlier') to previous turns.\n"
-                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {full_lang})."
+                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {lang_name}). Do not use English."
             )
             
             user_prompt = f"Context:\n{context}\n\n"
@@ -341,12 +344,13 @@ class RAGService:
                 return summary_res
 
         # Call LLM using general knowledge system prompt
+        lang_name = self._get_full_language_name(detected_lang)
         system_prompt = (
             "You are a helpful AI assistant. Answer the user's question using your general knowledge.\n"
             "Keep your answer brief, factual, and direct.\n"
             "Use the 'Recent Chat History' to understand the context of the conversation and resolve references to previous turns.\n"
             "Do NOT mention that you are answering using general knowledge or that the context is missing, as a warning prefix has already been added to your response.\n"
-            f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {full_lang})."
+            f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {lang_name}). Do not use English."
         )
         user_prompt = ""
         if history_context:
@@ -393,7 +397,6 @@ class RAGService:
         # Step 0: Clean query and classify intent (corrects spelling mistakes dynamically)
         corrected_query, category = await self._classify_and_correct_query(query_text)
         detected_lang = detect_document_language(corrected_query)
-        full_lang = LANG_NAMES.get(detected_lang, "English")
 
         # Retrieve short-term memory (conversation history) if chat_id is specified
         history_context = ""
@@ -437,11 +440,12 @@ class RAGService:
 
         # Case A: Pure General AI Mode (no target documents)
         if not doc_ids:
+            lang_name = self._get_full_language_name(detected_lang)
             system_prompt = (
                 "You are AuraQA, a helpful, intelligent, and secure offline AI assistant.\n"
                 "Provide detailed, smart, and context-aware responses to the user's questions.\n"
                 "Use the 'Recent Chat History' to understand the context of the conversation and resolve references to previous turns.\n"
-                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {full_lang})."
+                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {lang_name}). Do not use English."
             )
             user_prompt = ""
             if history_context:
@@ -503,12 +507,13 @@ class RAGService:
                 context_blocks.append(f"[Source File: {filename}, Page/Row {chunk.page_number}]: {chunk.text}")
             context = "\n\n".join(context_blocks)
             
+            lang_name = self._get_full_language_name(detected_lang)
             system_prompt = (
                 "You are a helpful AI assistant. Answer the user's question based strictly and ONLY on the provided Context.\n"
                 "Keep your answer extremely brief, factual, and direct (at most 2 short sentences). Do not make up facts, extrapolate, or mention external info.\n"
                 "If the answer is not contained in the Context, respond with: 'This answer is not available in the uploaded document.'\n"
                 "Use the 'Recent Chat History' to understand the context of the conversation and resolve references (like 'it', 'they', 'the first one', 'what you said earlier') to previous turns.\n"
-                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {full_lang})."
+                f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {lang_name}). Do not use English."
             )
             
             user_prompt = f"Context:\n{context}\n\n"
@@ -540,12 +545,13 @@ class RAGService:
         prefix = self._get_out_of_scope_prefix(detected_lang)
         yield prefix
             
+        lang_name = self._get_full_language_name(detected_lang)
         system_prompt = (
             "You are a helpful AI assistant. Answer the user's question using your general knowledge.\n"
             "Keep your answer brief, factual, and direct.\n"
             "Use the 'Recent Chat History' to understand the context of the conversation and resolve references to previous turns.\n"
             "Do NOT mention that you are answering using general knowledge or that the context is missing, as a warning prefix has already been added to your response.\n"
-            f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {full_lang})."
+            f"IMPORTANT: You MUST write your response in the same language as the user's query (Language: {lang_name}). Do not use English."
         )
         user_prompt = ""
         if history_context:

@@ -24,7 +24,7 @@ def detect_document_language(text: str) -> str:
     try:
         detected_lang = detect(text)
         
-        # If detected as Swahili, Tagalog, Indonesian, Somali, Slovenian, or Italian, check for common Hausa keywords
+        # Heuristics check for Hausa keywords if classifier returns ID/TL/SO/SW/SL/IT
         if detected_lang in {"id", "tl", "so", "sw", "sl", "it"}:
             hausa_keywords = {
                 "ina", "so", "ki", "ku", "bani", "bayani", "hausa", "sannu", 
@@ -32,7 +32,6 @@ def detect_document_language(text: str) -> str:
                 "kuma", "haka", "domin", "hanya", "sarki", "gari", "baba", "rana"
             }
             words = set(text.lower().split())
-            # For short queries, even 1 keyword is enough; for longer texts, 2
             threshold = 1 if len(words) < 8 else 2
             if len(words.intersection(hausa_keywords)) >= threshold:
                 return "ha"
