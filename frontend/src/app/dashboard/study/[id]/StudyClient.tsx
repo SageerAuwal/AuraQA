@@ -393,10 +393,10 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                   className={`flex-grow py-3 text-center border-b-2 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                     activeTab === "summary" 
                       ? "border-primary text-primary" 
-                      : "border-transparent text-slate-400 hover:text-slate-200"
+                      : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                   }`}
                 >
-                  <BookMarked className="w-4 h-4" />
+                  <BookOpen className="w-4 h-4" />
                   <span>Chapter Summaries</span>
                 </button>
                 
@@ -638,10 +638,10 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                                         className={`w-full text-left p-3 rounded-lg border text-xs transition-all cursor-pointer ${
                                           quizSubmitted
                                             ? isCorrectOpt
-                                              ? "bg-emerald-950/40 border-emerald-500/40 text-emerald-200 font-bold"
+                                              ? "bg-emerald-100 dark:bg-emerald-950/40 border-emerald-500/40 text-emerald-800 dark:text-emerald-200 font-bold"
                                               : isSelected
-                                                ? "bg-red-950/40 border-red-500/40 text-red-200"
-                                                : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500"
+                                                ? "bg-red-100 dark:bg-red-950/40 border-red-500/40 text-red-800 dark:text-red-200"
+                                                : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500 dark:text-slate-500"
                                             : isSelected
                                               ? "bg-primary/10 border-primary/50 text-primary font-bold"
                                               : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-muted hover:bg-slate-200 dark:hover:bg-slate-900/30"
@@ -670,10 +670,10 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                                         className={`px-5 py-2.5 rounded-lg border text-xs transition-all cursor-pointer ${
                                           quizSubmitted
                                             ? isCorrectOpt
-                                              ? "bg-emerald-950/40 border-emerald-500/40 text-emerald-200 font-bold"
+                                              ? "bg-emerald-100 dark:bg-emerald-950/40 border-emerald-500/40 text-emerald-800 dark:text-emerald-200 font-bold"
                                               : isSelected
-                                                ? "bg-red-950/40 border-red-500/40 text-red-200"
-                                                : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500"
+                                                ? "bg-red-100 dark:bg-red-950/40 border-red-500/40 text-red-800 dark:text-red-200"
+                                                : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500 dark:text-slate-500"
                                             : isSelected
                                               ? "bg-primary/10 border-primary/50 text-primary font-bold"
                                               : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-muted hover:bg-slate-200 dark:hover:bg-slate-900/30"
@@ -698,13 +698,13 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                                     className={`w-full max-w-md bg-slate-100 dark:bg-slate-950/40 border border-border/30 rounded-lg px-4 py-2 text-xs focus:outline-none focus:border-primary/50 text-foreground transition-all duration-150 disabled:opacity-75 ${
                                       quizSubmitted
                                         ? isCorrect
-                                          ? "border-emerald-500/40 text-emerald-200"
-                                          : "border-red-500/40 text-red-200"
+                                          ? "border-emerald-500/40 text-emerald-700 dark:text-emerald-200"
+                                          : "border-red-500/40 text-red-700 dark:text-red-200"
                                         : "border-border/30"
                                     }`}
                                   />
                                   {quizSubmitted && !isCorrect && (
-                                    <p className="text-[10px] text-emerald-400 font-semibold">
+                                    <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
                                       Correct answer keyword: <span className="underline">{q.correct_answer}</span>
                                     </p>
                                   )}
