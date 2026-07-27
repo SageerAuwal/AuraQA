@@ -461,7 +461,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                             className={`w-full text-left p-3 rounded-lg border text-xs transition-all cursor-pointer ${
                               selectedChapterIdx === idx
                                 ? "bg-primary/5 border-primary/40 text-primary font-bold"
-                                : "bg-transparent border-border/20 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-900/40"
+                                : "bg-transparent border-border/20 text-muted hover:bg-slate-200 dark:hover:bg-slate-900/40"
                             }`}
                           >
                             <div className="flex justify-between items-center mb-1">
@@ -489,7 +489,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                           Pages {summary.chapters[selectedChapterIdx]?.start_page}–{summary.chapters[selectedChapterIdx]?.end_page}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                      <p className="text-xs text-foreground leading-relaxed whitespace-pre-line">
                         {formatTextWithBold(summary.chapters[selectedChapterIdx]?.summary || "No summary details generated.")}
                       </p>
                     </div>
@@ -500,7 +500,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                         <BookMarked className="w-4 h-4 text-primary" />
                         <span>Comprehensive Document Summary</span>
                       </h4>
-                      <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                      <p className="text-xs text-foreground leading-relaxed whitespace-pre-line">
                         {formatTextWithBold(summary.summary_text)}
                       </p>
                     </div>
@@ -516,7 +516,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                         </h4>
                         <ul className="space-y-2.5">
                           {summary.key_points.map((pt, idx) => (
-                            <li key={idx} className="flex items-start space-x-2.5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <li key={idx} className="flex items-start space-x-2.5 text-xs text-foreground leading-relaxed">
                               <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                               <span>{formatTextWithBold(pt)}</span>
                             </li>
@@ -530,7 +530,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                           <Award className="w-4 h-4 text-primary" />
                           <span>Study Conclusions</span>
                         </h4>
-                        <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                        <p className="text-xs text-foreground leading-relaxed whitespace-pre-line">
                           {formatTextWithBold(summary.conclusions)}
                         </p>
                       </div>
@@ -644,7 +644,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                                                 : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500"
                                             : isSelected
                                               ? "bg-primary/10 border-primary/50 text-primary font-bold"
-                                              : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-900/30"
+                                              : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-muted hover:bg-slate-200 dark:hover:bg-slate-900/30"
                                         }`}
                                       >
                                         {opt}
@@ -676,7 +676,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                                                 : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500"
                                             : isSelected
                                               ? "bg-primary/10 border-primary/50 text-primary font-bold"
-                                              : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-900/30"
+                                              : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-muted hover:bg-slate-200 dark:hover:bg-slate-900/30"
                                         }`}
                                       >
                                         {opt}
@@ -830,7 +830,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                             setIsFlipped(false);
                             setTimeout(() => setCurrentCardIdx(prev => prev - 1), 150);
                           }}
-                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-slate-700 dark:text-slate-300 hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-muted hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                         >
                           <ChevronLeft className="w-5 h-5" />
                         </button>
@@ -850,7 +850,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                             setIsFlipped(false);
                             setTimeout(() => setCurrentCardIdx(prev => prev + 1), 150);
                           }}
-                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-slate-700 dark:text-slate-300 hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-muted hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                         >
                           <ChevronRight className="w-5 h-5" />
                         </button>
