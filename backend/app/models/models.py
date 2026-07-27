@@ -10,6 +10,9 @@ class User(Base):
     name = Column(String, nullable=False)
     email = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
+    # Account lockout fields
+    failed_attempts = Column(Integer, default=0, nullable=False)
+    locked_until = Column(DateTime, nullable=True)
     
     # Relationships
     documents = relationship("Document", back_populates="user", cascade="all, delete-orphan")
