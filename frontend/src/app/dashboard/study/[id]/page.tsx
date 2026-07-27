@@ -802,20 +802,20 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                             <h3 className="font-extrabold text-foreground text-base max-w-md leading-relaxed whitespace-pre-line">
                               {formatTextWithBold(flashcardSet.cards[currentCardIdx]?.front)}
                             </h3>
-                            <span className="text-[10px] text-slate-500 font-medium">
+                            <span className="text-[10px] text-muted font-medium">
                               Click card to reveal answer
                             </span>
                           </div>
 
-                          {/* Back Side: Answer */}
-                          <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-900 border border-primary/30 p-8 rounded-2xl flex flex-col justify-between items-center text-center select-none shadow-xl">
-                            <span className="px-2 py-0.5 rounded bg-emerald-950 border border-emerald-500/30 text-[9px] font-bold text-emerald-400 tracking-wider uppercase">
+                          {/* Back Side: Answer — uses glass-panel-emerald so it respects light/dark theme */}
+                          <div className="absolute w-full h-full backface-hidden rotate-y-180 glass-panel-emerald border border-primary/30 p-8 rounded-2xl flex flex-col justify-between items-center text-center select-none shadow-xl">
+                            <span className="px-2 py-0.5 rounded bg-primary/10 border border-primary/20 text-[9px] font-bold text-primary tracking-wider uppercase">
                               Correct Explanation / Answer
                             </span>
-                            <p className="text-slate-200 text-xs leading-relaxed max-w-md whitespace-pre-line">
+                            <p className="text-foreground text-xs leading-relaxed max-w-md whitespace-pre-line">
                               {formatTextWithBold(flashcardSet.cards[currentCardIdx]?.back)}
                             </p>
-                            <span className="text-[10px] text-slate-500 font-medium">
+                            <span className="text-[10px] text-muted font-medium">
                               Click card to show question
                             </span>
                           </div>
