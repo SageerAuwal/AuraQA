@@ -28,6 +28,9 @@ next-env.d.ts
 backend/.license
 .license
 
+# AuraQA private credentials backup — NEVER push this
+AuraQA_Keys_PRIVATE.txt
+
 # Database & SQLite
 *.db
 *.sqlite3
