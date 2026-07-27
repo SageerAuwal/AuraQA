@@ -56,7 +56,7 @@ const formatTextWithBold = (text: string) => {
   });
 };
 
-export default function ChatClient({ params }: ChatPageProps) {
+export default function ChatPage({ params }: ChatPageProps) {
   const resolvedParams = use(params);
   const chatId = parseInt(resolvedParams.id, 10);
 

@@ -14,9 +14,9 @@ router = APIRouter()
 
 def detect_document_language(text: str) -> str:
     """
-    Detects the language of the document or query.
+    Detects the language of the document.
     Includes fallback heuristics for Hausa, which is sometimes misidentified
-    by langdetect as Swahili ('sw'), Somali ('so'), Tagalog ('tl'), or Indonesian ('id').
+    by langdetect as Indonesian ('id') or Tagalog ('tl') for shorter texts.
     """
     if not text.strip():
         return "en"
@@ -24,16 +24,14 @@ def detect_document_language(text: str) -> str:
     try:
         detected_lang = detect(text)
         
-        # Heuristics check for Hausa keywords if classifier returns ID/TL/SO/SW/SL/IT
-        if detected_lang in {"id", "tl", "so", "sw", "sl", "it"}:
+        # Heuristics check for Hausa keywords if classifier returns ID/TL/SO
+        if detected_lang in {"id", "tl", "so"}:
             hausa_keywords = {
-                "ina", "so", "ki", "ku", "bani", "bayani", "hausa", "sannu", 
-                "yaya", "kake", "wannan", "harshen", "sauki", "aka", "rubuta", 
-                "kuma", "haka", "domin", "hanya", "sarki", "gari", "baba", "rana"
+                "wannan", "harshen", "sauki", "aka", "rubuta", "kuma", 
+                "haka", "domin", "hanya", "sarki", "gari", "baba", "rana"
             }
             words = set(text.lower().split())
-            threshold = 1 if len(words) < 8 else 2
-            if len(words.intersection(hausa_keywords)) >= threshold:
+            if len(words.intersection(hausa_keywords)) >= 2:
                 return "ha"
                 
         return detected_lang
