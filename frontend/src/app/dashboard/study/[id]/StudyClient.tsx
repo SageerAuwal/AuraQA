@@ -71,7 +71,7 @@ const formatTextWithBold = (text: string) => {
   });
 };
 
-export default function StudyClient({ params }: StudyPageProps) {
+export default function StudyDashboardPage({ params }: StudyPageProps) {
   const resolvedParams = use(params);
   const documentId = parseInt(resolvedParams.id, 10);
 
@@ -405,7 +405,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                   className={`flex-grow py-3 text-center border-b-2 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                     activeTab === "quiz" 
                       ? "border-primary text-primary" 
-                      : "border-transparent text-slate-400 hover:text-slate-200"
+                      : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                   }`}
                 >
                   <ListChecks className="w-4 h-4" />
@@ -417,7 +417,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                   className={`flex-grow py-3 text-center border-b-2 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                     activeTab === "flashcards" 
                       ? "border-primary text-primary" 
-                      : "border-transparent text-slate-400 hover:text-slate-200"
+                      : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                   }`}
                 >
                   <HelpCircle className="w-4 h-4" />
@@ -447,8 +447,8 @@ export default function StudyClient({ params }: StudyPageProps) {
                   
                   {/* Left Column: Detected Chapters */}
                   <div className="lg:col-span-4 space-y-4">
-                    <div className="p-5 rounded-xl border border-border/10 bg-slate-950/20 space-y-3">
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
+                    <div className="p-5 rounded-xl border border-border/10 bg-slate-100 dark:bg-slate-950/20 space-y-3">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center space-x-1.5">
                         <BookOpen className="w-4 h-4 text-primary" />
                         <span>Auto-Detected Chapters</span>
                       </h3>
@@ -461,7 +461,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                             className={`w-full text-left p-3 rounded-lg border text-xs transition-all cursor-pointer ${
                               selectedChapterIdx === idx
                                 ? "bg-primary/5 border-primary/40 text-primary font-bold"
-                                : "bg-transparent border-border/20 text-slate-300 hover:bg-slate-900/40"
+                                : "bg-transparent border-border/20 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-900/40"
                             }`}
                           >
                             <div className="flex justify-between items-center mb-1">
@@ -489,7 +489,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                           Pages {summary.chapters[selectedChapterIdx]?.start_page}–{summary.chapters[selectedChapterIdx]?.end_page}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
+                      <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                         {formatTextWithBold(summary.chapters[selectedChapterIdx]?.summary || "No summary details generated.")}
                       </p>
                     </div>
@@ -500,7 +500,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                         <BookMarked className="w-4 h-4 text-primary" />
                         <span>Comprehensive Document Summary</span>
                       </h4>
-                      <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
+                      <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                         {formatTextWithBold(summary.summary_text)}
                       </p>
                     </div>
@@ -516,7 +516,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                         </h4>
                         <ul className="space-y-2.5">
                           {summary.key_points.map((pt, idx) => (
-                            <li key={idx} className="flex items-start space-x-2.5 text-xs text-slate-300 leading-relaxed">
+                            <li key={idx} className="flex items-start space-x-2.5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                               <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                               <span>{formatTextWithBold(pt)}</span>
                             </li>
@@ -530,7 +530,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                           <Award className="w-4 h-4 text-primary" />
                           <span>Study Conclusions</span>
                         </h4>
-                        <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
+                        <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
                           {formatTextWithBold(summary.conclusions)}
                         </p>
                       </div>
@@ -608,11 +608,11 @@ export default function StudyClient({ params }: StudyPageProps) {
                               }`}
                             >
                               <div className="flex items-start space-x-3 mb-4">
-                                <span className="w-6 h-6 rounded bg-slate-900 border border-border/30 flex items-center justify-center text-xs font-bold text-slate-400 shrink-0">
+                                <span className="w-6 h-6 rounded bg-slate-200 dark:bg-slate-900 border border-border/30 flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-400 shrink-0">
                                   {idx + 1}
                                 </span>
                                 <div>
-                                  <span className="px-2 py-0.5 rounded bg-slate-800 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-2 inline-block">
+                                  <span className="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[9px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2 inline-block">
                                     {q.question_type === "mcq" ? "Multiple Choice" : q.question_type === "tf" ? "True / False" : "Short Answer"}
                                   </span>
                                   <h4 className="font-bold text-sm text-foreground leading-relaxed">
@@ -641,10 +641,10 @@ export default function StudyClient({ params }: StudyPageProps) {
                                               ? "bg-emerald-950/40 border-emerald-500/40 text-emerald-200 font-bold"
                                               : isSelected
                                                 ? "bg-red-950/40 border-red-500/40 text-red-200"
-                                                : "bg-slate-950/20 border-border/10 text-slate-500"
+                                                : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500"
                                             : isSelected
                                               ? "bg-primary/10 border-primary/50 text-primary font-bold"
-                                              : "bg-slate-950/10 border-border/10 text-slate-300 hover:bg-slate-900/30"
+                                              : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-900/30"
                                         }`}
                                       >
                                         {opt}
@@ -673,10 +673,10 @@ export default function StudyClient({ params }: StudyPageProps) {
                                               ? "bg-emerald-950/40 border-emerald-500/40 text-emerald-200 font-bold"
                                               : isSelected
                                                 ? "bg-red-950/40 border-red-500/40 text-red-200"
-                                                : "bg-slate-950/20 border-border/10 text-slate-500"
+                                                : "bg-slate-200 dark:bg-slate-950/20 border-border/10 text-slate-500"
                                             : isSelected
                                               ? "bg-primary/10 border-primary/50 text-primary font-bold"
-                                              : "bg-slate-950/10 border-border/10 text-slate-300 hover:bg-slate-900/30"
+                                              : "bg-slate-100 dark:bg-slate-950/10 border-border/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-900/30"
                                         }`}
                                       >
                                         {opt}
@@ -695,7 +695,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                                     placeholder={quizSubmitted ? "No answer provided" : "Type your concise answer here..."}
                                     value={quizAnswers[q.id] || ""}
                                     onChange={(e) => handleShortAnswerChange(q.id, e.target.value)}
-                                    className={`w-full max-w-md bg-slate-950/40 border rounded-lg px-4 py-2 text-xs focus:outline-none focus:border-primary/50 text-foreground transition-all duration-150 disabled:opacity-75 ${
+                                    className={`w-full max-w-md bg-slate-100 dark:bg-slate-950/40 border border-border/30 rounded-lg px-4 py-2 text-xs focus:outline-none focus:border-primary/50 text-foreground transition-all duration-150 disabled:opacity-75 ${
                                       quizSubmitted
                                         ? isCorrect
                                           ? "border-emerald-500/40 text-emerald-200"
@@ -713,8 +713,8 @@ export default function StudyClient({ params }: StudyPageProps) {
 
                               {/* Quiz explanation box on submit */}
                               {quizSubmitted && q.explanation && (
-                                <div className="mt-4 pt-3 border-t border-border/10 pl-9 text-xs text-slate-400 leading-relaxed">
-                                  <span className="font-bold text-[10px] text-slate-300 uppercase tracking-wider block mb-1">
+                                <div className="mt-4 pt-3 border-t border-border/10 pl-9 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                  <span className="font-bold text-[10px] text-slate-600 dark:text-slate-300 uppercase tracking-wider block mb-1">
                                     Explanation:
                                   </span>
                                   {formatTextWithBold(q.explanation)}
@@ -773,11 +773,11 @@ export default function StudyClient({ params }: StudyPageProps) {
                     <div className="w-full flex flex-col items-center space-y-8">
                       {/* Progress bar */}
                       <div className="w-full space-y-1">
-                        <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        <div className="flex justify-between text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                           <span>Progress</span>
                           <span>Card {currentCardIdx + 1} of {flashcardSet.cards.length}</span>
                         </div>
-                        <div className="w-full h-1 bg-slate-900 rounded-full overflow-hidden">
+                        <div className="w-full h-1 bg-slate-200 dark:bg-slate-900 rounded-full overflow-hidden">
                           <div 
                             className="bg-primary h-full transition-all duration-300"
                             style={{ width: `${((currentCardIdx + 1) / flashcardSet.cards.length) * 100}%` }}
@@ -820,9 +820,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                             </span>
                           </div>
 
-                        </div>
                       </div>
-
                       {/* Flip Actions and navigations */}
                       <div className="flex items-center space-x-6">
                         <button
@@ -832,11 +830,11 @@ export default function StudyClient({ params }: StudyPageProps) {
                             setIsFlipped(false);
                             setTimeout(() => setCurrentCardIdx(prev => prev - 1), 150);
                           }}
-                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-slate-300 hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-slate-700 dark:text-slate-300 hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                         >
                           <ChevronLeft className="w-5 h-5" />
                         </button>
-
+ 
                         <button
                           type="button"
                           onClick={() => setIsFlipped(prev => !prev)}
@@ -844,7 +842,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                         >
                           Flip Card
                         </button>
-
+ 
                         <button
                           type="button"
                           disabled={currentCardIdx === flashcardSet.cards.length - 1}
@@ -852,7 +850,7 @@ export default function StudyClient({ params }: StudyPageProps) {
                             setIsFlipped(false);
                             setTimeout(() => setCurrentCardIdx(prev => prev + 1), 150);
                           }}
-                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-slate-300 hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                          className="flex items-center justify-center p-2 rounded-lg border border-border/30 hover:border-primary/40 text-slate-700 dark:text-slate-300 hover:text-primary transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                         >
                           <ChevronRight className="w-5 h-5" />
                         </button>
