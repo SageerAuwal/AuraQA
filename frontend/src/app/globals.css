@@ -97,3 +97,35 @@ body {
 .layout-border {
   border-color: var(--border) !important;
 }
+
+/* ============================================================
+   LIGHT MODE — Force all text to solid black for readability.
+   This ensures study mode panels match the dashboard contrast.
+   ============================================================ */
+html.light p,
+html.light span,
+html.light li,
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.light label,
+html.light input,
+html.light button:not(.text-primary):not(.text-background),
+html.light .glass-panel *,
+html.light .glass-panel-emerald * {
+  color: #000000;
+}
+
+/* Keep primary-colored and background-colored text untouched */
+html.light .text-primary,
+html.light .text-primary *,
+html.light .text-background,
+html.light .text-emerald-800,
+html.light .text-red-800,
+html.light .text-emerald-400,
+html.light .text-red-400 {
+  color: inherit;
+}
