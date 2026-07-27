@@ -5,6 +5,13 @@ from app.core.config import settings
 from app.core.database import Base, engine
 from app.api.endpoints import auth, upload, documents, chat, study, search
 from app.core.context import active_model_var
+from app.security.license_check import enforce_license
+
+# ── License & Hardware Protection ──────────────────────────────────────────────
+# Validates MASTER_KEY + hardware fingerprint before the server starts.
+# If either check fails, the process exits immediately with ACCESS DENIED.
+enforce_license(settings.MASTER_KEY)
+# ───────────────────────────────────────────────────────────────────────────────
 
 # Initialize database tables
 Base.metadata.create_all(bind=engine)

@@ -24,6 +24,10 @@ next-env.d.ts
 .env.production.local
 *.pem
 
+# AuraQA License file (machine-specific, never push to repo)
+backend/.license
+.license
+
 # Database & SQLite
 *.db
 *.sqlite3

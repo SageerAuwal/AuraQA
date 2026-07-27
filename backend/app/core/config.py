@@ -14,7 +14,10 @@ os.environ["HF_HUB_OFFLINE"] = "1"
 class Settings:
     PROJECT_NAME: str = "AI Document QA System"
     API_V1_STR: str = "/api"
-    
+
+    # License protection — must match the key in .license file
+    MASTER_KEY: str = os.getenv("MASTER_KEY", "")
+
     # Database configuration
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./chatbot.db")
     
