@@ -821,6 +821,7 @@ export default function StudyDashboardPage({ params }: StudyPageProps) {
                           </div>
 
                       </div>
+                      </div>
                       {/* Flip Actions and navigations */}
                       <div className="flex items-center space-x-6">
                         <button
