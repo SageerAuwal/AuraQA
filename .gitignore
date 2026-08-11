@@ -36,10 +36,6 @@ AuraQA_Keys_PRIVATE.txt
 *.sqlite3
 
 # Local uploads & vector indices (dynamic user data)
-# Distribution & build output
-backend/dist/
-backend/app/static/
-backend/AuraQA.spec
 backend/uploads/*
 !backend/uploads/.gitkeep
 backend/vectorstore/*
@@ -50,3 +46,8 @@ vectorstore/
 # OS files
 .DS_Store
 Thumbs.db
+
+# PyInstaller build files
+backend/AuraQA.spec
+backend/app/static/
+
