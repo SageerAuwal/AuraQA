@@ -123,17 +123,15 @@ graph TB
 
 ## 📋 Prerequisites
 
-Before installing, make sure you have:
-
-- ✅ **Python 3.10+** — [Download](https://python.org/downloads)
-- ✅ **Node.js 18+** — [Download](https://nodejs.org)
-- ✅ **Ollama** — [Download](https://ollama.com/download)
 - ✅ **Git** — [Download](https://git-scm.com)
 - ✅ **An activation key** — Contact the system owner
+- ✅ Internet connection for first-time setup
+
+> Everything else (Python, Node.js, Ollama, AI models) is installed **automatically** by `setup.bat`.
 
 ---
 
-## 🚀 Installation Guide
+## 🚀 Installation — 3 Steps Only
 
 ### Step 1 — Clone the Repository
 ```bash
@@ -141,50 +139,39 @@ git clone https://github.com/SageerAuwal/AuraQA.git
 cd AuraQA
 ```
 
-### Step 2 — Set Up Python Virtual Environment
-```bash
-python -m venv venv
-
-# Windows
-venv\Scripts\activate
-
-# macOS/Linux
-source venv/bin/activate
+### Step 2 — Run the Auto Installer
+```
+Double-click  setup.bat
 ```
 
-### Step 3 — Install Backend Dependencies
-```bash
-cd backend
-pip install -r requirements.txt
-cd ..
+This single file automatically:
+- ✅ Installs Python 3.11 (if missing)
+- ✅ Installs Node.js 20 (if missing)
+- ✅ Installs Ollama (if missing)
+- ✅ Creates Python virtual environment
+- ✅ Installs all backend packages
+- ✅ Downloads the multilingual embedding model
+- ✅ Installs all frontend packages
+- ✅ Downloads Qwen 2.5 AI model (397MB)
+- ✅ Downloads Gemma 2 AI model (1.6GB)
+- ✅ Activates your license key
+- ✅ Builds the frontend
+
+> ⚠️ During setup you will be asked to enter your **MASTER_KEY** (provided by the system owner). Without it the system will not run.
+
+### Step 3 — Start the System
+```
+Double-click  run_servers.bat
 ```
 
-### Step 4 — Install Frontend Dependencies
-```bash
-cd frontend
-npm install
-cd ..
+Then open your browser at **http://localhost:5000** ✅
+
+---
+
+## ⏹️ Stopping the System
 ```
-
-### Step 5 — Download AI Models
-```bash
-ollama pull qwen2.5:0.5b
-ollama pull gemma2:2b
+Double-click  stop_servers.bat
 ```
-
-### Step 6 — Activate the License
-You must have a valid **MASTER_KEY** from the system owner.
-
-```bash
-cd backend
-python generate_license.py
-```
-
-When prompted, enter your MASTER_KEY. This will:
-- Generate a hardware-bound `.license` file for your machine
-- Create the required `.env` file automatically
-
-> ⚠️ **Without a valid MASTER_KEY, the system will not start.**
 
 ---
 
