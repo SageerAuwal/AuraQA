@@ -8,6 +8,39 @@ echo    AuraQA - AI Document Assistant
 echo  ====================================================
 echo.
 
+:: ── PRE-FLIGHT: Detect if setup.bat was never run ────────────────
+set SETUP_MISSING=0
+
+if not exist "%~dp0venv\Scripts\python.exe" set SETUP_MISSING=1
+if not exist "%~dp0frontend\node_modules" set SETUP_MISSING=1
+if not exist "%~dp0backend\check_license.py" set SETUP_MISSING=1
+
+if %SETUP_MISSING% == 1 (
+    color 0C
+    echo.
+    echo  ====================================================
+    echo.
+    echo    SETUP NOT COMPLETE!
+    echo.
+    echo    It looks like you have not run setup.bat yet.
+    echo    AuraQA cannot start without completing setup.
+    echo.
+    echo  ====================================================
+    echo.
+    echo  HOW TO FIX:
+    echo.
+    echo    1. Close this window
+    echo    2. Double-click   setup.bat
+    echo    3. Wait for all installation to finish
+    echo    4. Enter the MASTER KEY when asked
+    echo    5. Then double-click run_servers.bat again
+    echo.
+    echo  ====================================================
+    echo.
+    pause
+    exit /b 1
+)
+
 :: ── Step 1: Check license validity ──────────────────────────────
 echo  [1/5] Checking license...
 
