@@ -1,0 +1,216 @@
+====================================================
+  AuraQA - Installation Requirements Guide
+  AI-Powered Academic Document Assistant
+====================================================
+
+This guide lists everything you need to download and
+install BEFORE running AuraQA on your computer.
+
+After installing all requirements below, simply run
+setup.bat and it will handle the rest automatically.
+
+====================================================
+  REQUIRED SOFTWARE
+====================================================
+
+----------------------------------------------------
+1. GIT
+----------------------------------------------------
+   What it is : Tool for downloading (cloning) the
+                AuraQA system from GitHub.
+
+   Download   : https://git-scm.com/downloads
+
+   How to install:
+     - Click the link above
+     - Download the Windows installer
+     - Run it and click Next until done
+     - Restart your computer after install
+
+   How to check if installed:
+     - Open Command Prompt (CMD)
+     - Type:  git --version
+     - You should see:  git version 2.x.x
+
+----------------------------------------------------
+2. PYTHON 3.11
+----------------------------------------------------
+   What it is : The programming language that runs
+                the AuraQA backend server.
+
+   Download   : https://www.python.org/downloads/release/python-3119/
+
+   Direct Link: https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe
+
+   How to install:
+     - Click the direct link above to download
+     - Run the installer
+     - IMPORTANT: Check the box that says
+       "Add Python to PATH" before clicking Install
+     - Click Install Now
+
+   How to check if installed:
+     - Open Command Prompt (CMD)
+     - Type:  python --version
+     - You should see:  Python 3.11.x
+
+   NOTE: setup.bat installs this automatically if
+         it is missing on your machine.
+
+----------------------------------------------------
+3. NODE.JS 20 (LTS)
+----------------------------------------------------
+   What it is : JavaScript runtime that runs the
+                AuraQA frontend (website interface).
+
+   Download   : https://nodejs.org/en/download
+
+   Direct Link: https://nodejs.org/dist/v20.17.0/node-v20.17.0-x64.msi
+
+   How to install:
+     - Click the direct link above to download
+     - Run the .msi installer
+     - Click Next until done
+     - Restart your computer after install
+
+   How to check if installed:
+     - Open Command Prompt (CMD)
+     - Type:  node --version
+     - You should see:  v20.x.x
+     - Also type:  npm --version
+     - You should see:  10.x.x
+
+   NOTE: setup.bat installs this automatically if
+         it is missing on your machine.
+
+----------------------------------------------------
+4. OLLAMA
+----------------------------------------------------
+   What it is : The local AI engine that runs the
+                AI models on your machine completely
+                offline. No internet needed after.
+
+   Download   : https://ollama.com/download
+
+   Direct Link: https://github.com/ollama/ollama/releases/latest/download/OllamaSetup.exe
+
+   How to install:
+     - Click the direct link above to download
+     - Run OllamaSetup.exe
+     - It installs silently in the background
+     - No restart needed
+
+   How to check if installed:
+     - Open Command Prompt (CMD)
+     - Type:  ollama --version
+     - You should see:  ollama version 0.x.x
+
+   NOTE: setup.bat installs this automatically if
+         it is missing on your machine.
+
+====================================================
+  AI MODELS (Downloaded Automatically)
+====================================================
+
+These two AI models are downloaded automatically
+by setup.bat. You do NOT need to download them
+manually. They require internet during setup only.
+
+----------------------------------------------------
+5. QWEN 2.5 (0.5B) - Fast Mode Model
+----------------------------------------------------
+   Size       : ~397 MB
+   Purpose    : Quick responses, daily use
+   Downloaded : Automatically by setup.bat via
+                the command: ollama pull qwen2.5:0.5b
+
+----------------------------------------------------
+6. GEMMA 2 (2B) - Smart Mode Model
+----------------------------------------------------
+   Size       : ~1.6 GB
+   Purpose    : Deep reasoning, complex questions
+   Downloaded : Automatically by setup.bat via
+                the command: ollama pull gemma2:2b
+
+====================================================
+  ACTIVATION KEY (Required)
+====================================================
+
+AuraQA is a protected system. You MUST have a
+MASTER KEY from the system owner before the
+system will work.
+
+   - Contact the system owner to request a key
+   - The key will be given to you personally
+   - During setup.bat, a popup will ask you to
+     enter the key
+   - Without the key, the system will not start
+
+====================================================
+  MINIMUM SYSTEM REQUIREMENTS
+====================================================
+
+   Operating System : Windows 10 or Windows 11
+   RAM              : 4 GB minimum (8 GB recommended)
+   Storage          : At least 5 GB free space
+   Internet         : Required during setup only
+                      (Offline after setup is done)
+   GPU/CPU          : Any modern CPU works
+                      (GPU optional but faster)
+
+====================================================
+  HOW TO INSTALL AURAQA (STEP BY STEP)
+====================================================
+
+After installing Git, Python, Node.js, and Ollama:
+
+STEP 1 - Clone the system
+   Open Command Prompt and run:
+   git clone https://github.com/SageerAuwal/AuraQA.git
+
+STEP 2 - Go into the folder
+   cd AuraQA
+
+STEP 3 - Run the auto installer
+   Double-click:  setup.bat
+   This will automatically:
+     - Create Python virtual environment
+     - Install all backend packages
+     - Download the AI embedding model
+     - Install all frontend packages
+     - Download Qwen 2.5 AI model (~397MB)
+     - Download Gemma 2 AI model (~1.6GB)
+     - Activate your license key
+     - Build the frontend
+
+STEP 4 - Start the system
+   Double-click:  run_servers.bat
+   Then open your browser at: http://localhost:5000
+
+STEP 5 - Stop the system when done
+   Double-click:  stop_servers.bat
+
+====================================================
+  QUICK REFERENCE - DOWNLOAD LINKS
+====================================================
+
+   Git        : https://git-scm.com/downloads
+   Python 3.11: https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe
+   Node.js 20 : https://nodejs.org/dist/v20.17.0/node-v20.17.0-x64.msi
+   Ollama     : https://github.com/ollama/ollama/releases/latest/download/OllamaSetup.exe
+   AuraQA     : https://github.com/SageerAuwal/AuraQA
+
+====================================================
+  NEED HELP?
+====================================================
+
+   If you run into any problems during installation,
+   contact the system owner (Sageer Auwal) at the
+   Federal University of Kashef, Gombe State.
+
+   GitHub Repo: https://github.com/SageerAuwal/AuraQA
+
+====================================================
+  AuraQA - Learn Smarter, Not Harder
+  (c) 2026 Sageer Auwal. All Rights Reserved.
+====================================================
