@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎓 AuraQA
+# AuraQA
 ### AI-Powered Academic Document Assistant
 
 *A fully offline, privacy-preserving RAG system for academic document Q&A*
@@ -21,41 +21,41 @@ Upload your research papers, thesis chapters, or lecture notes — then **chat w
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |---|---|
-| 💬 **Document Chat (RAG)** | Ask questions directly about your uploaded PDF documents using Retrieval-Augmented Generation |
-| 📚 **Study Mode** | Auto-generates document summaries, key concepts, study conclusions, and chapter breakdowns |
-| 🃏 **Flashcard Generator** | Creates interactive flip-card flashcards from your document content |
-| 📝 **Quiz Generator** | Generates MCQ, True/False, and short-answer quizzes from document content |
-| 🌍 **Multilingual Support** | Supports English, French, Arabic, Spanish, German, and Hausa |
-| 🔒 **License Protection** | Hardware-bound key system — system cannot run without an activation key |
-| 🛡️ **Security Hardened** | Rate limiting, CORS lockdown, account lockout, prompt injection guard |
-| 📴 **Fully Offline** | All AI inference runs locally via Ollama — zero external API calls |
-| 🌙 **Dark & Light Mode** | Full theme support across all pages |
-| 🔐 **JWT Authentication** | Secure user registration, login, and session management |
+| **Document Chat (RAG)** | Ask questions directly about your uploaded PDF documents using Retrieval-Augmented Generation |
+| **Study Mode** | Auto-generates document summaries, key concepts, study conclusions, and chapter breakdowns |
+| **Flashcard Generator** | Creates interactive flip-card flashcards from your document content |
+| **Quiz Generator** | Generates MCQ, True/False, and short-answer quizzes from document content |
+| **Multilingual Support** | Supports English, French, Arabic, Spanish, German, and Hausa |
+| **License Protection** | Hardware-bound key system — system cannot run without an activation key |
+| **Security Hardened** | Rate limiting, CORS lockdown, account lockout, prompt injection guard |
+| **Fully Offline** | All AI inference runs locally via Ollama — zero external API calls |
+| **Dark & Light Mode** | Full theme support across all pages |
+| **JWT Authentication** | Secure user registration, login, and session management |
 
 ---
 
-## 🧠 AI Models
+## AI Models
 
 AuraQA uses two locally running AI models via **Ollama**:
 
 | Model | Size | Mode | Best For |
 |---|---|---|---|
-| **Qwen 2.5 (0.5B)** | 397 MB | ⚡ Fast Mode | Quick answers, daily use |
-| **Gemma 2 (2B)** | 1.6 GB | 🧠 Smart Mode | Deep reasoning, complex questions |
+| **Qwen 2.5 (0.5B)** | 397 MB | Fast Mode | Quick answers, daily use |
+| **Gemma 2 (2B)** | 1.6 GB | Smart Mode | Deep reasoning, complex questions |
 
 Both models run **100% on your machine** — no API keys, no internet, no subscriptions.
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```mermaid
 graph TB
-    User["👤 User (Browser)"]
+    User["User (Browser)"]
 
     subgraph Frontend["Frontend — Next.js (Port 5000)"]
         UI["React Pages\n(Dashboard, Chat, Study Mode)"]
@@ -63,7 +63,7 @@ graph TB
     end
 
     subgraph Backend["Backend — FastAPI (Port 4000)"]
-        License["🔐 License Guard\n(Startup Check)"]
+        License["License Guard\n(Startup Check)"]
         AuthAPI["Auth API\n(/api/auth)"]
         UploadAPI["Upload API\n(/api/upload)"]
         ChatAPI["Chat API\n(/api/chat)"]
@@ -96,7 +96,7 @@ graph TB
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
 - **FastAPI** — High-performance Python REST API framework
@@ -121,17 +121,17 @@ graph TB
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
-- ✅ **Git** — [Download](https://git-scm.com)
-- ✅ **An activation key** — Contact the system owner
-- ✅ Internet connection for first-time setup
+- **Git** — [Download](https://git-scm.com)
+- **An activation key** — Contact the system owner
+- Internet connection for first-time setup
 
 > Everything else (Python, Node.js, Ollama, AI models) is installed **automatically** by `setup.bat`.
 
 ---
 
-## 🚀 Installation — 3 Steps Only
+## Installation — 3 Steps Only
 
 ### Step 1 — Clone the Repository
 ```bash
@@ -141,41 +141,42 @@ cd AuraQA
 
 ### Step 2 — Run the Auto Installer
 ```
-Double-click  setup.bat
+Double-click setup.bat
 ```
 
 This single file automatically:
-- ✅ Installs Python 3.11 (if missing)
-- ✅ Installs Node.js 20 (if missing)
-- ✅ Installs Ollama (if missing)
-- ✅ Creates Python virtual environment
-- ✅ Installs all backend packages
-- ✅ Downloads the multilingual embedding model
-- ✅ Installs all frontend packages
-- ✅ Downloads Qwen 2.5 AI model (397MB)
-- ✅ Downloads Gemma 2 AI model (1.6GB)
-- ✅ Activates your license key
-- ✅ Builds the frontend
+- Installs Python 3.11 (if missing)
+- Installs Node.js 20 (if missing)
+- Installs Ollama (if missing)
+- Creates Python virtual environment
+- Installs all backend packages
+- Downloads the multilingual embedding model
+- Installs all frontend packages
+- Downloads Qwen 2.5 AI model (397MB)
+- Downloads Gemma 2 AI model (1.6GB)
+- Activates your license key
+- Builds the frontend
 
-> ⚠️ During setup you will be asked to enter your **MASTER_KEY** (provided by the system owner). Without it the system will not run.
+> [!NOTE]
+> During setup you will be asked to enter your **MASTER_KEY** (provided by the system owner). Without it the system will not run.
 
 ### Step 3 — Start the System
 ```
-Double-click  run_servers.bat
+Double-click run_servers.bat
 ```
 
-Then open your browser at **http://localhost:5000** ✅
+Then open your browser at **http://localhost:5000**
 
 ---
 
-## ⏹️ Stopping the System
+## Stopping the System
 ```
-Double-click  stop_servers.bat
+Double-click stop_servers.bat
 ```
 
 ---
 
-## ▶️ Running the System
+## Running the System
 
 ### Option 1 — Using the Batch Files (Windows, Recommended)
 
@@ -214,7 +215,7 @@ Open your browser and go to: **http://localhost:5000**
 
 ---
 
-## 🔐 License Protection System
+## License Protection System
 
 AuraQA is protected by a **two-layer hardware-bound license system**:
 
@@ -224,51 +225,51 @@ AuraQA is protected by a **two-layer hardware-bound license system**:
 ### What Happens Without a Key
 When someone tries to run the system without a valid key:
 ```
-══════════════════════════════════════════
+==========================================
   AuraQA — ACCESS DENIED
   Reason: MASTER_KEY is missing from .env file.
-══════════════════════════════════════════
+==========================================
 ```
 
 The server exits immediately. No access is granted.
 
 ### Getting Access
-Contact the system owner to receive a **MASTER_KEY**, then follow **Step 6** of the installation guide above.
+Contact the system owner to receive a **MASTER_KEY**, then follow **Step 2** of the installation guide above.
 
 > **Note:** The `.env` file, `.license` file, and all keys are excluded from this repository via `.gitignore`. They are never published to GitHub.
 
 ---
 
-## 🛡️ Security Features
+## Security Features
 
 | Feature | Implementation |
 |---|---|
 | Hardware-bound licensing | Machine fingerprint + HMAC-SHA256 signature |
 | API documentation hidden | `/docs` and `/redoc` endpoints disabled |
 | CORS restricted | Only `localhost:5000` allowed |
-| Account lockout | 5 failed logins → 15-minute lock |
+| Account lockout | 5 failed logins -> 15-minute lock |
 | Prompt injection guard | Banned phrase filter + system prompt enforcer |
-| Security response headers | X-Frame-Options, X-XSS-Protection, nosniff |
+| Security response headers | X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Referrer-Policy |
 | JWT authentication | HS256 signed tokens, 60-minute expiry |
 | Password hashing | bcrypt with salt |
 | Offline AI inference | No external API calls ever made |
 
 ---
 
-## 🌍 Supported Languages
+## Supported Languages
 
 | Language | Code | Status |
 |---|---|---|
-| English | `en` | ✅ Full support |
-| French | `fr` | ✅ Full support |
-| Arabic | `ar` | ✅ Full support |
-| Spanish | `es` | ✅ Full support |
-| German | `de` | ✅ Full support |
-| Hausa | `ha` | ✅ Supported (embedding level) |
+| English | `en` | Full support |
+| French | `fr` | Full support |
+| Arabic | `ar` | Full support |
+| Spanish | `es` | Full support |
+| German | `de` | Full support |
+| Hausa | `ha` | Supported (embedding level) |
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 AuraQA/
@@ -293,36 +294,37 @@ AuraQA/
 │
 ├── run_servers.bat             # Start all services (with license check)
 ├── stop_servers.bat            # Stop all services cleanly
-└── README.md                   # This file
+├── setup.bat                   # Automated setup script
+└── README.md                   # Project documentation
 ```
 
 ---
 
-## 👤 Author
+## Author
 
 **Sageer Auwal**  
 Federal University of Kashef, Gombe State  
 Faculty of Science and Computer Science  
 
-📧 Contact the author for access keys and support.
+Contact the author for access keys and support.
 
 ---
 
-## 📄 License
+## License
 
 This project is **proprietary software**. All rights reserved.
 
-- ❌ You may **not** use, copy, modify, or distribute this software without explicit written permission from the author.
-- ❌ You may **not** run this software without a valid activation key issued by the author.
-- ✅ You may **view** the source code for educational reference only.
+- You may **not** use, copy, modify, or distribute this software without explicit written permission from the author.
+- You may **not** run this software without a valid activation key issued by the author.
+- You may **view** the source code for educational reference only.
 
-© 2026 Sageer Auwal. All rights reserved.
+Copyright (c) 2026 Sageer Auwal. All rights reserved.
 
 ---
 
 <div align="center">
 
-**Built with ❤️ for academic excellence**  
+**Built for academic excellence**  
 *AuraQA — Learn Smarter, Not Harder*
 
 </div>
